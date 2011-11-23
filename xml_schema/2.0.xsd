@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.nisshiee.org/password_manager/xml/2.0.xsd"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.nisshiee.org/password_manager/xml/2.0.xsd">
+
+	<complexType name="Db">
+		<all>
+			<element name="data" type="tns:Data" maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="markDefs" type="tns:MarkDefs" maxOccurs="1"
+				minOccurs="0"></element>
+		</all>
+	</complexType>
+
+	<complexType name="Def">
+		<attribute name="id" type="positiveInteger" use="required"></attribute>
+		<attribute name="name" use="required">
+			<simpleType>
+				<restriction base="string">
+					<whiteSpace value="collapse"></whiteSpace>
+				</restriction>
+			</simpleType>
+		</attribute>
+	</complexType>
+
+	<complexType name="Data">
+		<sequence>
+			<element name="service" type="tns:Service"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+            <element name="file" type="tns:PMFile" maxOccurs="unbounded" minOccurs="0">
+			</element>
+            <element name="directory" type="tns:Directory"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+		</sequence>
+	</complexType>
+
+	<element name="db" type="tns:Db"></element>
+
+	<complexType name="MarkDefs">
+		<sequence>
+			<element name="def" type="tns:Def" maxOccurs="unbounded"
+				minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Service">
+		<sequence>
+			<element name="word" type="tns:Word" maxOccurs="unbounded"
+				minOccurs="0">
+			</element>
+			<element name="mark" type="tns:Mark" maxOccurs="unbounded"
+				minOccurs="0">
+			</element>
+		</sequence>
+		<attribute name="name" use="required">
+			<simpleType>
+				<restriction base="string">
+					<whiteSpace value="collapse"></whiteSpace>
+				</restriction>
+			</simpleType>
+		</attribute>
+	</complexType>
+
+
+	<complexType name="Word">
+		<attribute name="name" use="required">
+			<simpleType>
+				<restriction base="string">
+					<whiteSpace value="collapse"></whiteSpace>
+				</restriction>
+			</simpleType>
+		</attribute>
+		<attribute name="value" use="required">
+			<simpleType>
+				<restriction base="string">
+					<whiteSpace value="collapse"></whiteSpace>
+				</restriction>
+			</simpleType>
+		</attribute>
+	</complexType>
+
+
+
+	<complexType name="Mark">
+		<attribute name="id" type="positiveInteger" use="required"></attribute>
+	</complexType>
+
+	<complexType name="Directory">
+		<sequence>
+			<element name="service" type="tns:Service"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+            <element name="file" type="tns:PMFile" maxOccurs="unbounded" minOccurs="0">
+			</element>
+            <element name="directory" type="tns:Directory"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+		</sequence>
+		<attribute name="name">
+			<simpleType>
+				<restriction base="string">
+					<whiteSpace value="collapse"></whiteSpace>
+				</restriction>
+			</simpleType>
+		</attribute>
+	</complexType>
+
+	<complexType name="PMFile">
+		<attribute name="name">
+			<simpleType>
+				<restriction base="string">
+					<whiteSpace value="collapse"></whiteSpace>
+				</restriction>
+			</simpleType>
+		</attribute>
+		<attribute name="path">
+			<simpleType>
+				<restriction base="string">
+					<whiteSpace value="collapse"></whiteSpace>
+				</restriction>
+			</simpleType>
+		</attribute>
+	</complexType>
+</schema>
