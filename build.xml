@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     build    
+     jarを生成します
+                   
+     西岡寛兼                                                                
+     ====================================================================== -->
+<project name="buildJar" default="default">
+	<description>
+		jarを生成します
+    </description>
+
+	<property name="jardir" location="release" />
+	<property name="jarfile" location="release/PasswordManager.jar" />
+
+	<property name="srcdir" location="./src" />
+	<property name="classdir" location="./bin" />
+
+
+	<!-- ================================= 
+          target: default              
+         ================================= -->
+	<target name="default" depends="compile" description="jarを生成します">
+		<mkdir dir="${jardir}" />
+		<jar destfile="${jarfile}" manifest="META-INF/MANIFEST.MF">
+			<fileset dir="${classdir}" id="class">
+				<include name="**/*.class" />
+			</fileset>
+			<fileset dir="${srcdir}" id="src">
+				<include name="**/*.java" />
+			</fileset>
+
+			<fileset dir="./" id="resource">
+				<include name="img/*.gif" />
+				<include name="img/*.png" />
+			</fileset>
+			<!--
+			<fileset dir="./" id="resource">
+				<include name="img/**/*" />
+				<exclude name="img/workspace" />
+				<exclude name="img/workspace/**/*" />
+				<exclude name="**/Thumbs.db" />
+			</fileset>
+			-->
+		</jar>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: compile                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="compile">
+		<javac srcdir="${srcdir}" destdir="${classdir}" encoding="UTF-8" />
+	</target>
+
+</project>
