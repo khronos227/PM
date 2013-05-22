@@ -86,6 +86,13 @@ public class CenterCanvasListener implements MouseListener, ActionListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		this.markList.clearSelection();
+		this.fileList.clearSelection();
+		reselect(e);
+		if (e.isPopupTrigger() && this.logic.getSelectedService() != null) {
+			setMenuEnable();
+			popup.show(e.getComponent(), e.getX(), e.getY());
+		}
 	}
 
 	@Override
